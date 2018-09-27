@@ -19,25 +19,6 @@ public class FilterEngine {
         1f,-1f,1f,0f
     };
 
-    private static final String VERTEX_SHADER =
-            "attribute vec4 aPosition;" +
-            "uniform mat4 uTextureMatrix;"+
-            "attribute vec4 aTextureCoordinate;"+
-            "varying vec2 vTextureCoordinate;"+
-            "void main(){"+
-            "   vTextureCoordinate = (uTextureMatrix * aTextureCoordinate).xy;"+
-            "   gl_Position = aPosition;"+
-            "}";
-
-    private static final String FRAGMENT_SHADER =
-            "#extension GL_OES_EGL_image_external : require"+
-            "precision medimp float;"+
-            "uniform samplerExternalOES uTextureSampler;"+
-            "varying vec2 vTextureCoordinate;"+
-            "void main(){"+
-            "   vec4 vCameraColor = texture2D(uTextureSampler, vTextureCoordinate);"+
-            "   gl_FragColor = vCameraColor;"+
-            "}";
     public static final String aPosition = "aPosition";
     public static final String uTextureMatrix = "uTextureMatrix";
     public static final String aTextureCoordinate = "aTextureCoordinate";
@@ -54,8 +35,8 @@ public class FilterEngine {
         mContext = context;
         mOESTextureId = OESTextureId;
         floatBuffer = createBuffer(vertexData);
-        vertexShader = loadShader(GL_VERTEX_SHADER, VERTEX_SHADER);
-        fragmentShader = loadShader(GL_FRAGMENT_SHADER, FRAGMENT_SHADER);
+        vertexShader = loadShader(GL_VERTEX_SHADER, Utils.readShaderFromResource(context,R.raw.base_vertex_shader));
+        fragmentShader = loadShader(GL_FRAGMENT_SHADER, Utils.readShaderFromResource(context,R.raw.base_fragment_shader));
         mProgram = createProgram(vertexShader, fragmentShader);
     }
 

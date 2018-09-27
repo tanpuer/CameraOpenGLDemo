@@ -47,7 +47,7 @@ public class CameraV1OpenGLActivity extends AppCompatActivity{
             mGLSurfaceView = null;
         }
         if (mCamera != null){
-            mCamera.startPreview();
+            mCamera.stopPreivew();
             mCamera.releaseCamera();
             mCamera = null;
         }

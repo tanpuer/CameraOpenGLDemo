@@ -70,9 +70,7 @@ public class CameraV1Renderer implements GLSurfaceView.Renderer{
 
         glClearColor(0f,0f,0f,0f);
 
-        glUseProgram(mProgram);
-        aPositionLocation = glGetAttribLocation(mProgram, "aPosition");
-        Log.d(TAG, glGetError() + "");
+        aPositionLocation = glGetAttribLocation(mProgram, FilterEngine.aPosition);
         uTextureMatrixLocation = glGetUniformLocation(mProgram, FilterEngine.uTextureMatrix);
         aTextureCoordinateLocation = glGetAttribLocation(mProgram, FilterEngine.aTextureCoordinate);
         uTextureSamplerLocation = glGetUniformLocation(mProgram, FilterEngine.uTextureSampler);
@@ -100,6 +98,7 @@ public class CameraV1Renderer implements GLSurfaceView.Renderer{
         if (mCamera == null || mGLSurfaceView == null){
             return false;
         }
+        //根据外部纹理id创建surfaceTexture
         mSurfaceTexture = new SurfaceTexture(mOESTextureId);
         mSurfaceTexture.setOnFrameAvailableListener(new SurfaceTexture.OnFrameAvailableListener() {
             @Override
@@ -107,6 +106,7 @@ public class CameraV1Renderer implements GLSurfaceView.Renderer{
                 mGLSurfaceView.requestRender();
             }
         });
+        //将此surfaceTexture作为相机预览输出
         mCamera.setPreviewTexture(mSurfaceTexture);
         mCamera.startPreview();
         return true;
