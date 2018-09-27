@@ -11,7 +11,7 @@ import android.view.WindowManager;
 
 public class CameraV1OpenGLActivity extends Activity{
 
-    private CameraGLSurfaceView mGLSurfaceView;
+    private CameraV1GLSurfaceView mGLSurfaceView;
     private int mCameraId;
     private CameraV1 mCamera;
 
@@ -21,7 +21,7 @@ public class CameraV1OpenGLActivity extends Activity{
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        mGLSurfaceView = new CameraGLSurfaceView(this);
+        mGLSurfaceView = new CameraV1GLSurfaceView(this);
         mCameraId = getIntent().getBooleanExtra("openBackCamera", true)? Camera.CameraInfo.CAMERA_FACING_BACK: Camera.CameraInfo.CAMERA_FACING_FRONT;
         DisplayMetrics metrics = new DisplayMetrics();
         mCamera = new CameraV1(this);

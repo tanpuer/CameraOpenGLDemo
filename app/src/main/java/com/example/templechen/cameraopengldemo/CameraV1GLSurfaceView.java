@@ -3,11 +3,11 @@ package com.example.templechen.cameraopengldemo;
 import android.content.Context;
 import android.opengl.GLSurfaceView;
 
-public class CameraGLSurfaceView extends GLSurfaceView {
+public class CameraV1GLSurfaceView extends GLSurfaceView {
 
     private CameraV1Renderer mRenderer;
 
-    public CameraGLSurfaceView(Context context) {
+    public CameraV1GLSurfaceView(Context context) {
         super(context);
     }
 

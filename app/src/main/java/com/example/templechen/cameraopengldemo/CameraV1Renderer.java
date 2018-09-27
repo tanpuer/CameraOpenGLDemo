@@ -16,14 +16,14 @@ public class CameraV1Renderer implements GLSurfaceView.Renderer{
     private int mOESTextureId = -1;
     private SurfaceTexture mSurfaceTexture;
     private CameraV1 mCamera;
-    private CameraGLSurfaceView mGLSurfaceView;
+    private CameraV1GLSurfaceView mGLSurfaceView;
     private boolean bIsPreviewStarted;
     private Context mContext;
-    private GrayFilterEngine mFilterEngine;
+    private BaseFilterEngine mFilterEngine;
     private int[] mFBOIds = new int[1];
     private float[] transformMatrix = new float[16];
 
-    public void init(CameraV1 cameraV1, CameraGLSurfaceView cameraGLSurfaceView, boolean isPreviewStarted, Context context){
+    public void init(CameraV1 cameraV1, CameraV1GLSurfaceView cameraGLSurfaceView, boolean isPreviewStarted, Context context){
         mCamera = cameraV1;
         mGLSurfaceView = cameraGLSurfaceView;
         bIsPreviewStarted = isPreviewStarted;
@@ -33,7 +33,7 @@ public class CameraV1Renderer implements GLSurfaceView.Renderer{
     @Override
     public void onSurfaceCreated(GL10 gl10, EGLConfig eglConfig) {
         mOESTextureId = Utils.createOESTextureObject();
-        mFilterEngine = new GrayFilterEngine(mContext, mOESTextureId);
+        mFilterEngine = new FourPartsFilterEngine(mContext, mOESTextureId);
         glGenFramebuffers(1, mFBOIds, 0);
         glBindFramebuffer(GL_FRAMEBUFFER, mFBOIds[0]);
     }
