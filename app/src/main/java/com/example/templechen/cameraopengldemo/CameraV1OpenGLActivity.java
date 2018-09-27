@@ -21,9 +21,8 @@ public class CameraV1OpenGLActivity extends Activity{
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-
         mGLSurfaceView = new CameraGLSurfaceView(this);
-        mCameraId = Camera.CameraInfo.CAMERA_FACING_BACK;
+        mCameraId = getIntent().getBooleanExtra("openBackCamera", true)? Camera.CameraInfo.CAMERA_FACING_BACK: Camera.CameraInfo.CAMERA_FACING_FRONT;
         DisplayMetrics metrics = new DisplayMetrics();
         mCamera = new CameraV1(this);
         if (!mCamera.openCamera(metrics.widthPixels, metrics.heightPixels,mCameraId)){
@@ -47,7 +46,7 @@ public class CameraV1OpenGLActivity extends Activity{
             mGLSurfaceView = null;
         }
         if (mCamera != null){
-            mCamera.stopPreivew();
+            mCamera.stopPreview();
             mCamera.releaseCamera();
             mCamera = null;
         }

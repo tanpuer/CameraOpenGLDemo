@@ -15,6 +15,10 @@ import java.util.List;
 public class CameraV1 {
 
     private static final String TAG = "CameraV1";
+    private static final int BACK_CAMERA_WIDTH = 1920;
+    private static final int BACK_CAMERA_HEIGHT = 1080;
+    private static final int FRONT_CAMERA_WIDTH = 1920;
+    private static final int FRONT_CAMERA_HEIGHT = 1080;
 
     private Activity mActivity;
     private Camera mCamera;
@@ -25,19 +29,27 @@ public class CameraV1 {
 
     public boolean openCamera(int width, int height, int cameraId){
         try{
+            boolean openBackCamera = cameraId == CameraInfo.CAMERA_FACING_BACK? true:false;
             mCamera = Camera.open(cameraId);
             Parameters parameters = mCamera.getParameters();
             parameters.set("orientation", "portrait");
-            parameters.setFocusMode(Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
+            if (openBackCamera){
+                parameters.setFocusMode(Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
+            }
             List<Size> previewSizes = parameters.getSupportedPreviewSizes();
-            int previewWidth = 1280;
-            int previewHeight = 720;
+            if (previewSizes.size() <1){
+                return false;
+            }
+            int previewWidth = previewSizes.get(0).width;
+            int previewHeight = previewSizes.get(0).height;
+            int estimatedWidth = openBackCamera?BACK_CAMERA_WIDTH:FRONT_CAMERA_WIDTH;
+            int estimatedHeight = openBackCamera?BACK_CAMERA_HEIGHT:FRONT_CAMERA_HEIGHT;
             for (Size size: previewSizes){
                 Log.d(TAG, "openCamera: " + size.width);
                 Log.d(TAG, "openCamera: " + size.height);
-                if (size.width == 1920 && size.height == 1080){
-                    previewWidth = 1920;
-                    previewHeight = 1080;
+                if (size.width == estimatedWidth && size.height == estimatedHeight){
+                    previewWidth = estimatedWidth;
+                    previewHeight = estimatedHeight;
                 }
             }
             parameters.setPreviewSize(previewWidth, previewHeight);
@@ -91,7 +103,7 @@ public class CameraV1 {
         }
     }
 
-    public void stopPreivew(){
+    public void stopPreview(){
         if (mCamera != null){
             mCamera.stopPreview();
         }

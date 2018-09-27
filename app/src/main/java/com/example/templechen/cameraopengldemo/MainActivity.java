@@ -7,6 +7,8 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,14 +21,27 @@ public class MainActivity extends AppCompatActivity {
 
     private static final int REQUEST_CAMERA_CODE = 10001;
 
+    private Button startFrontCameraBtn;
+    private Button startBackCameraBtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        // Example of a call to a native method
-        TextView tv = (TextView) findViewById(R.id.sample_text);
-        tv.setText(stringFromJNI());
+        startFrontCameraBtn = findViewById(R.id.front_camera_btn);
+        startBackCameraBtn = findViewById(R.id.back_camera_btn);
+        startFrontCameraBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startCameraActivty(false);
+            }
+        });
+        startBackCameraBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startCameraActivty(true);
+            }
+        });
 
         checkCameraPermission();
     }
@@ -35,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA_CODE);
         }else {
-            startCameraActivty();
+//            startCameraActivty();
         }
     }
 
@@ -45,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
             switch (requestCode){
                 case REQUEST_CAMERA_CODE:{
                     if (grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                        startCameraActivty();
+//                        startCameraActivty();
                     }else {
                         Toast.makeText(this, "必须要相机权限", Toast.LENGTH_SHORT).show();
                     }
@@ -57,8 +72,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void startCameraActivty(){
+    private void startCameraActivty(boolean openBackCamera){
         Intent intent = new Intent(this, CameraV1OpenGLActivity.class);
+        intent.putExtra("openBackCamera",openBackCamera);
         startActivity(intent);
     }
 
