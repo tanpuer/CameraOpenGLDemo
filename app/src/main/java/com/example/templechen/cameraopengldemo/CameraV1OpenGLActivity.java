@@ -1,15 +1,15 @@
 package com.example.templechen.cameraopengldemo;
 
+import android.app.Activity;
 import android.content.pm.ActivityInfo;
 import android.hardware.Camera;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.view.Window;
 import android.view.WindowManager;
 
-public class CameraV1OpenGLActivity extends AppCompatActivity{
+public class CameraV1OpenGLActivity extends Activity{
 
     private CameraGLSurfaceView mGLSurfaceView;
     private int mCameraId;
@@ -43,7 +43,7 @@ public class CameraV1OpenGLActivity extends AppCompatActivity{
         super.onPause();
         if (mGLSurfaceView != null){
             mGLSurfaceView.onPause();
-            mGLSurfaceView.destory();
+            mGLSurfaceView.destroy();
             mGLSurfaceView = null;
         }
         if (mCamera != null){

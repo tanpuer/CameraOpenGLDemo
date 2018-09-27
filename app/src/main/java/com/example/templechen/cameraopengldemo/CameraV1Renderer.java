@@ -3,9 +3,7 @@ package com.example.templechen.cameraopengldemo;
 import android.content.Context;
 import android.graphics.SurfaceTexture;
 import android.opengl.GLES11Ext;
-import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
-import android.util.Log;
 
 import java.nio.FloatBuffer;
 

@@ -3,13 +3,18 @@ package com.example.templechen.cameraopengldemo;
 import android.app.Activity;
 import android.graphics.SurfaceTexture;
 import android.hardware.Camera;
+import android.hardware.Camera.Size;
 import android.hardware.Camera.Parameters;
 import android.hardware.Camera.CameraInfo;
+import android.util.Log;
 import android.view.Surface;
 
 import java.io.IOException;
+import java.util.List;
 
 public class CameraV1 {
+
+    private static final String TAG = "CameraV1";
 
     private Activity mActivity;
     private Camera mCamera;
@@ -24,7 +29,18 @@ public class CameraV1 {
             Parameters parameters = mCamera.getParameters();
             parameters.set("orientation", "portrait");
             parameters.setFocusMode(Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
-            parameters.setPreviewSize(1280, 720);
+            List<Size> previewSizes = parameters.getSupportedPreviewSizes();
+            int previewWidth = 1280;
+            int previewHeight = 720;
+            for (Size size: previewSizes){
+                Log.d(TAG, "openCamera: " + size.width);
+                Log.d(TAG, "openCamera: " + size.height);
+                if (size.width == 1920 && size.height == 1080){
+                    previewWidth = 1920;
+                    previewHeight = 1080;
+                }
+            }
+            parameters.setPreviewSize(previewWidth, previewHeight);
 
             CameraInfo info = new CameraInfo();
             Camera.getCameraInfo(cameraId, info);

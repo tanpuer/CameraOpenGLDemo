@@ -18,7 +18,7 @@ public class CameraGLSurfaceView extends GLSurfaceView {
         setRenderer(mRenderer);
     }
 
-    public void destory(){
+    public void destroy(){
         if (mRenderer != null){
             mRenderer.destroy();
             mRenderer = null;
