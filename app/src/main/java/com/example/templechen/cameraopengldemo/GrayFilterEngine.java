@@ -1,6 +1,7 @@
 package com.example.templechen.cameraopengldemo;
 
 import android.content.Context;
+import android.opengl.GLES11Ext;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -8,7 +9,7 @@ import java.nio.FloatBuffer;
 
 import static android.opengl.GLES20.*;
 
-public class FilterEngine {
+public class GrayFilterEngine {
 
     private static final float[] vertexData = {
         1f,1f, 1f,1f,
@@ -19,10 +20,10 @@ public class FilterEngine {
         1f,-1f,1f,0f
     };
 
-    public static final String aPosition = "aPosition";
-    public static final String uTextureMatrix = "uTextureMatrix";
-    public static final String aTextureCoordinate = "aTextureCoordinate";
-    public static final String uTextureSampler = "uTextureSampler";
+    private static final String aPosition = "aPosition";
+    private static final String uTextureMatrix = "uTextureMatrix";
+    private static final String aTextureCoordinate = "aTextureCoordinate";
+    private static final String uTextureSampler = "uTextureSampler";
 
     private Context mContext;
     private int mOESTextureId;
@@ -30,8 +31,14 @@ public class FilterEngine {
     private int vertexShader = -1;
     private int fragmentShader = -1;
     private int mProgram;
+    private float[] transformMatrix = new float[16];
 
-    public FilterEngine(Context context, int OESTextureId){
+    private int aPositionLocation = -1;
+    private int uTextureMatrixLocation = -1;
+    private int aTextureCoordinateLocation = -1;
+    private int uTextureSamplerLocation = -1;
+
+    public GrayFilterEngine(Context context, int OESTextureId){
         mContext = context;
         mOESTextureId = OESTextureId;
         floatBuffer = createBuffer(vertexData);
@@ -73,11 +80,31 @@ public class FilterEngine {
         return mProgram;
     }
 
-    public FloatBuffer getFloatBuffer() {
-        return floatBuffer;
+    public void drawFrame(){
+        aPositionLocation = glGetAttribLocation(mProgram, GrayFilterEngine.aPosition);
+        uTextureMatrixLocation = glGetUniformLocation(mProgram, GrayFilterEngine.uTextureMatrix);
+        aTextureCoordinateLocation = glGetAttribLocation(mProgram, GrayFilterEngine.aTextureCoordinate);
+        uTextureSamplerLocation = glGetUniformLocation(mProgram, GrayFilterEngine.uTextureSampler);
+
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GLES11Ext.GL_TEXTURE_EXTERNAL_OES, mOESTextureId);
+
+        glUniform1i(uTextureSamplerLocation, 0);
+        glUniformMatrix4fv(uTextureMatrixLocation, 1, false,transformMatrix, 0);
+
+        if (floatBuffer != null){
+            floatBuffer.position(0);
+            glEnableVertexAttribArray(aPositionLocation);
+            glVertexAttribPointer(aPositionLocation, 2, GL_FLOAT, false, 16, floatBuffer);
+            floatBuffer.position(2);
+            glEnableVertexAttribArray(aTextureCoordinateLocation);
+            glVertexAttribPointer(aTextureCoordinateLocation, 2,GL_FLOAT, false, 16, floatBuffer);
+        }
+        glDrawArrays(GL_TRIANGLES, 0, 6);
+        glBindFramebuffer(GL_FRAMEBUFFER, 0);
     }
 
-    public int getmProgram() {
-        return mProgram;
+    public void setTransformMatrix(float[] transformMatrix) {
+        this.transformMatrix = transformMatrix;
     }
 }
