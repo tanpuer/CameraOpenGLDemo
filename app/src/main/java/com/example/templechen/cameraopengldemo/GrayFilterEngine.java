@@ -42,8 +42,8 @@ public class GrayFilterEngine {
         mContext = context;
         mOESTextureId = OESTextureId;
         floatBuffer = createBuffer(vertexData);
-        vertexShader = loadShader(GL_VERTEX_SHADER, Utils.readShaderFromResource(context,R.raw.base_vertex_shader));
-        fragmentShader = loadShader(GL_FRAGMENT_SHADER, Utils.readShaderFromResource(context,R.raw.base_fragment_shader));
+        vertexShader = loadShader(GL_VERTEX_SHADER, Utils.readShaderFromResource(context,R.raw.gray_vertex_shader));
+        fragmentShader = loadShader(GL_FRAGMENT_SHADER, Utils.readShaderFromResource(context,R.raw.gray_fragment_shader));
         mProgram = createProgram(vertexShader, fragmentShader);
     }
 
