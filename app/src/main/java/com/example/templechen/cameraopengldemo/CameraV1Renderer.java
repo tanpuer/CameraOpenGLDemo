@@ -33,7 +33,9 @@ public class CameraV1Renderer implements GLSurfaceView.Renderer{
     @Override
     public void onSurfaceCreated(GL10 gl10, EGLConfig eglConfig) {
         mOESTextureId = Utils.createOESTextureObject();
-        mFilterEngine = new FourPartsFilterEngine(mContext, mOESTextureId);
+        //设置不同的filter
+        mFilterEngine = new ScanningLineFilterEngine(mContext, mOESTextureId);
+        //
         glGenFramebuffers(1, mFBOIds, 0);
         glBindFramebuffer(GL_FRAMEBUFFER, mFBOIds[0]);
     }
