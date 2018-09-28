@@ -6,7 +6,6 @@ import android.hardware.Camera;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -33,6 +32,7 @@ public class CameraV1OpenGLActivity extends Activity{
         }
         mGLSurfaceView.init(mCamera, false,this);
         setContentView(mGLSurfaceView);
+
     }
 
     @Override
@@ -41,8 +41,8 @@ public class CameraV1OpenGLActivity extends Activity{
     }
 
     @Override
-    protected void onPause() {
-        super.onPause();
+    protected void onDestroy() {
+        super.onDestroy();
         if (mGLSurfaceView != null){
             mGLSurfaceView.onPause();
             mGLSurfaceView.destroy();

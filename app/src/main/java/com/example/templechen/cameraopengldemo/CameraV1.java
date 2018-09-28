@@ -22,6 +22,7 @@ public class CameraV1 {
 
     private Activity mActivity;
     private Camera mCamera;
+    private CameraMediaCodec mediaCodec;
 
     public CameraV1(Activity activity){
         mActivity = activity;
@@ -90,6 +91,10 @@ public class CameraV1 {
             mCamera.setDisplayOrientation(result);
 
             mCamera.setParameters(parameters);
+
+            //mediacodec
+            mediaCodec = new CameraMediaCodec();
+            mediaCodec.init(previewWidth, previewHeight);
         }catch (Exception e){
             e.printStackTrace();
             return false;
@@ -100,6 +105,9 @@ public class CameraV1 {
     public void startPreview(){
         if (mCamera != null){
             mCamera.startPreview();
+            mediaCodec.startCodec();
+
+            setPreviewCallback();
         }
     }
 
@@ -120,10 +128,25 @@ public class CameraV1 {
         }
     }
 
+    public void setPreviewCallback(){
+        if (mCamera != null){
+            mCamera.setPreviewCallback(new Camera.PreviewCallback() {
+                @Override
+                public void onPreviewFrame(byte[] data, Camera camera) {
+                    mediaCodec.encodeFrame(data);
+                }
+            });
+        }
+    }
+
     public void releaseCamera(){
         if (mCamera != null){
             mCamera.release();
             mCamera = null;
+        }
+        if (mediaCodec != null){
+            mediaCodec.pauseCodec();
+            mediaCodec.release();
         }
     }
 }

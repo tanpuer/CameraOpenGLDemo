@@ -47,8 +47,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void checkCameraPermission(){
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA_CODE);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_CAMERA_CODE);
         }else {
 //            startCameraActivty();
         }
@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
                     if (grantResults[0] == PackageManager.PERMISSION_GRANTED){
 //                        startCameraActivty();
                     }else {
-                        Toast.makeText(this, "必须要相机权限", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "必须要相机和存储权限", Toast.LENGTH_SHORT).show();
                     }
                     break;
                 }
