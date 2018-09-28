@@ -3,6 +3,7 @@ package com.example.templechen.cameraopengldemo;
 import android.content.Context;
 import android.opengl.GLES11Ext;
 import android.opengl.GLES20;
+import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -14,12 +15,21 @@ import java.nio.FloatBuffer;
 
 import javax.microedition.khronos.opengles.GL10;
 
+import static android.opengl.GLES20.GL_COMPILE_STATUS;
+import static android.opengl.GLES20.GL_FALSE;
+import static android.opengl.GLES20.GL_LINK_STATUS;
 import static android.opengl.GLES20.GL_NO_ERROR;
 import static android.opengl.GLES20.glAttachShader;
 import static android.opengl.GLES20.glCompileShader;
 import static android.opengl.GLES20.glCreateProgram;
 import static android.opengl.GLES20.glCreateShader;
+import static android.opengl.GLES20.glDeleteProgram;
+import static android.opengl.GLES20.glDeleteShader;
 import static android.opengl.GLES20.glGetError;
+import static android.opengl.GLES20.glGetProgramInfoLog;
+import static android.opengl.GLES20.glGetProgramiv;
+import static android.opengl.GLES20.glGetShaderInfoLog;
+import static android.opengl.GLES20.glGetShaderiv;
 import static android.opengl.GLES20.glLinkProgram;
 import static android.opengl.GLES20.glShaderSource;
 import static android.opengl.GLES20.glUseProgram;
@@ -101,6 +111,12 @@ public class Utils {
         }
         glShaderSource(shader, shaderSource);
         glCompileShader(shader);
+        int compiled[] = new int[1];
+        glGetShaderiv(shader, GL_COMPILE_STATUS, compiled, 0);
+        if (compiled[0] == GL_FALSE){
+            Log.e("Shader Compile error：",glGetShaderInfoLog(shader));
+            glDeleteShader(shader);
+        }
         return shader;
     }
 
@@ -112,8 +128,11 @@ public class Utils {
         glAttachShader(mProgram, vertexShader);
         glAttachShader(mProgram, fragmentShader);
         glLinkProgram(mProgram);
-        if (glGetError() != GL_NO_ERROR){
-            throw new RuntimeException("link Program failed");
+        int compiled[] = new int[1];
+        glGetProgramiv(mProgram, GL_LINK_STATUS, compiled, 0);
+        if (compiled[0] == GL_FALSE){
+            Log.e("Could not link program：", glGetProgramInfoLog(mProgram));
+            glDeleteProgram(mProgram);
         }
         glUseProgram(mProgram);
         return mProgram;
