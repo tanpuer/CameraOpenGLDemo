@@ -68,7 +68,7 @@ public class BaseFilterEngine {
             glVertexAttribPointer(aTextureCoordinateLocation, 2,GL_FLOAT, false, 16, floatBuffer);
         }
         glDrawArrays(GL_TRIANGLES, 0, 6);
-        glBindFramebuffer(GL_FRAMEBUFFER, 0);
+//        glBindFramebuffer(GL_FRAMEBUFFER, 0);
     }
 
     public void setTransformMatrix(float[] transformMatrix) {

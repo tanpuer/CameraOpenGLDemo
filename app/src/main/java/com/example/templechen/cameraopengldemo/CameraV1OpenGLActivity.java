@@ -6,10 +6,13 @@ import android.hardware.Camera;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 
 public class CameraV1OpenGLActivity extends Activity{
+
+    private static final String TAG = "CameraV1OpenGLActivity";
 
     private CameraV1GLSurfaceView mGLSurfaceView;
     private int mCameraId;
