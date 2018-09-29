@@ -21,4 +21,18 @@
         android:text="打开后置摄像头"
         />
 
+    <Button
+        android:id="@+id/front_camera_btn_v2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="打开前置摄像头V2"
+        />
+
+    <Button
+        android:id="@+id/back_camera_btn_v2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="打开后置摄像头V2"
+        />
+
 </LinearLayout>

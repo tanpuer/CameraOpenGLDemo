@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.templechen.cameraopengldemo.camera2.CameraV2OpenGLActivity;
+
 public class MainActivity extends AppCompatActivity {
 
     // Used to load the 'native-lib' library on application startup.
@@ -23,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
 
     private Button startFrontCameraBtn;
     private Button startBackCameraBtn;
+    private Button startFrontCameraBtnV2;
+    private Button startBackCameraBtnV2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +44,21 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startCameraActivty(true);
+            }
+        });
+
+        startFrontCameraBtnV2 = findViewById(R.id.front_camera_btn_v2);
+        startBackCameraBtnV2 = findViewById(R.id.back_camera_btn_v2);
+        startFrontCameraBtnV2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startCameraV2Activity(false);
+            }
+        });
+        startBackCameraBtnV2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startCameraV2Activity(true);
             }
         });
 
@@ -74,6 +93,12 @@ public class MainActivity extends AppCompatActivity {
 
     private void startCameraActivty(boolean openBackCamera){
         Intent intent = new Intent(this, CameraV1OpenGLActivity.class);
+        intent.putExtra("openBackCamera",openBackCamera);
+        startActivity(intent);
+    }
+
+    private void startCameraV2Activity(boolean openBackCamera){
+        Intent intent = new Intent(this, CameraV2OpenGLActivity.class);
         intent.putExtra("openBackCamera",openBackCamera);
         startActivity(intent);
     }
