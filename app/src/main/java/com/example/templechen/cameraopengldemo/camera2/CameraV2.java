@@ -33,7 +33,7 @@ public class CameraV2 extends BaseCamera {
     private static final String TAG = "CameraV2";
     private static final SparseIntArray ORIENTATIONS = new SparseIntArray();
     private static final int CAMERA_WIDTH = 1920;
-    private static final int CAMERA_HEIGHT = 1920;
+    private static final int CAMERA_HEIGHT = 1080;
     static {
         ORIENTATIONS.append(Surface.ROTATION_0, 0);
         ORIENTATIONS.append(Surface.ROTATION_90, 90);
