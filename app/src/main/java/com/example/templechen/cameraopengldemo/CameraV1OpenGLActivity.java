@@ -3,9 +3,12 @@ package com.example.templechen.cameraopengldemo;
 import android.app.Activity;
 import android.content.pm.ActivityInfo;
 import android.hardware.Camera;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.util.DisplayMetrics;
+import android.view.SurfaceHolder;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -16,6 +19,10 @@ public class CameraV1OpenGLActivity extends Activity{
     private CameraV1GLSurfaceView mGLSurfaceView;
     private int mCameraId;
     private CameraV1 mCamera;
+    private static MediaRecorderWrap mediaRecorderWrap;
+    private MediaRecorderAsyncTask mAsyncTask;
+
+    private Handler mainHandler = new Handler();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -32,6 +39,16 @@ public class CameraV1OpenGLActivity extends Activity{
         }
         mGLSurfaceView.init(mCamera, false,this);
         setContentView(mGLSurfaceView);
+
+//        mainHandler.postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                //use MediaRecorder to capture camera video
+//                mediaRecorderWrap = new MediaRecorderWrap(mCamera, CameraV1OpenGLActivity.this);
+//                mAsyncTask = new MediaRecorderAsyncTask();
+//                mAsyncTask.execute(null, null, null);
+//            }
+//        },2000);
 
     }
 
@@ -53,5 +70,25 @@ public class CameraV1OpenGLActivity extends Activity{
             mCamera.releaseCamera();
             mCamera = null;
         }
+        if (mAsyncTask != null){
+//            mAsyncTask.cancel(true);
+//            mAsyncTask = null;
+        }
     }
+
+    public class MediaRecorderAsyncTask extends AsyncTask<Void,Void, Boolean>{
+
+        @Override
+        protected Boolean doInBackground(Void... voids) {
+            if (mediaRecorderWrap.prepareVideoRecorder()){
+                mediaRecorderWrap.startRecord();
+                mediaRecorderWrap.isRecording = true;
+            }else {
+                mediaRecorderWrap.releaseMediaRecorder();
+                return false;
+            }
+            return true;
+        }
+    }
+
 }

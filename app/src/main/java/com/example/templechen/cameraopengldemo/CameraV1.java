@@ -147,8 +147,12 @@ public class CameraV1 {
             mCamera = null;
         }
         if (mediaCodec != null){
-            mediaCodec.pauseCodec();
-            mediaCodec.release();
+//            mediaCodec.pauseCodec();
+//            mediaCodec.release();
         }
+    }
+
+    public Camera getmCamera() {
+        return mCamera;
     }
 }

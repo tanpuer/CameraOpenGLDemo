@@ -2,6 +2,7 @@ package com.example.templechen.cameraopengldemo;
 
 import android.content.Context;
 import android.opengl.GLSurfaceView;
+import android.view.SurfaceHolder;
 
 public class CameraV1GLSurfaceView extends GLSurfaceView {
 
@@ -24,5 +25,4 @@ public class CameraV1GLSurfaceView extends GLSurfaceView {
             mRenderer = null;
         }
     }
-
 }
