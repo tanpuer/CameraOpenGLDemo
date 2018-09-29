@@ -104,6 +104,13 @@ public class CameraMediaCodec implements IMediaCodec {
     public void release() {
         mediaCodec.release();
         mediaCodec = null;
+        try {
+            outputStream.flush();
+            outputStream.close();
+            outputStream = null;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     //摄像头N21

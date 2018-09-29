@@ -93,8 +93,8 @@ public class CameraV1 {
             mCamera.setParameters(parameters);
 
             //mediacodec
-            mediaCodec = new CameraMediaCodec();
-            mediaCodec.init(previewWidth, previewHeight);
+//            mediaCodec = new CameraMediaCodec();
+//            mediaCodec.init(previewWidth, previewHeight);
         }catch (Exception e){
             e.printStackTrace();
             return false;
@@ -105,7 +105,8 @@ public class CameraV1 {
     public void startPreview(){
         if (mCamera != null){
             mCamera.startPreview();
-            mediaCodec.startCodec();
+
+//            mediaCodec.startCodec();
 
             setPreviewCallback();
         }
@@ -133,7 +134,8 @@ public class CameraV1 {
             mCamera.setPreviewCallback(new Camera.PreviewCallback() {
                 @Override
                 public void onPreviewFrame(byte[] data, Camera camera) {
-                    mediaCodec.encodeFrame(data);
+                    //todo MediaCodec and MediaMuxer pratice
+//                    mediaCodec.encodeFrame(data);
                 }
             });
         }
