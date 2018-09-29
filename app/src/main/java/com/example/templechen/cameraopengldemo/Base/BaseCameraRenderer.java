@@ -4,11 +4,9 @@ import android.content.Context;
 import android.graphics.SurfaceTexture;
 import android.opengl.GLSurfaceView;
 
-import com.example.templechen.cameraopengldemo.BaseFilterEngine;
-import com.example.templechen.cameraopengldemo.ScanningLineFilterEngine;
-import com.example.templechen.cameraopengldemo.Utils;
-import com.example.templechen.cameraopengldemo.camera2.CameraV2;
-import com.example.templechen.cameraopengldemo.camera2.CameraV2GLSurfaceView;
+import com.example.templechen.cameraopengldemo.filterEngine.BaseFilterEngine;
+import com.example.templechen.cameraopengldemo.filterEngine.ScanningLineFilterEngine;
+import com.example.templechen.cameraopengldemo.utils.GLUtils;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
@@ -22,7 +20,7 @@ public class BaseCameraRenderer implements GLSurfaceView.Renderer {
 
     private int mOESTextureId = -1;
     private SurfaceTexture mSurfaceTexture;
-    private CameraV2GLSurfaceView mGLSurfaceView;
+    private BaseCameraGLSurfaceView mGLSurfaceView;
     private boolean bIsPreviewStarted;
     private Context mContext;
     private BaseFilterEngine mFilterEngine;
@@ -31,7 +29,7 @@ public class BaseCameraRenderer implements GLSurfaceView.Renderer {
 
     protected BaseCamera mCamera;
 
-    public void init(BaseCamera baseCamera, CameraV2GLSurfaceView cameraGLSurfaceView, boolean isPreviewStarted, Context context){
+    public void init(BaseCamera baseCamera, BaseCameraGLSurfaceView cameraGLSurfaceView, boolean isPreviewStarted, Context context){
         mCamera = baseCamera;
         mGLSurfaceView = cameraGLSurfaceView;
         bIsPreviewStarted = isPreviewStarted;
@@ -40,7 +38,7 @@ public class BaseCameraRenderer implements GLSurfaceView.Renderer {
 
     @Override
     public void onSurfaceCreated(GL10 gl10, EGLConfig eglConfig) {
-        mOESTextureId = Utils.createOESTextureObject();
+        mOESTextureId = GLUtils.createOESTextureObject();
         //设置不同的filter
         mFilterEngine = new ScanningLineFilterEngine(mContext, mOESTextureId);
         //todo!!!!

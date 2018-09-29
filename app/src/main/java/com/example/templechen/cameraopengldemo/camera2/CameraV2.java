@@ -19,6 +19,8 @@ import android.util.Size;
 import android.util.SparseIntArray;
 import android.view.Surface;
 
+import com.example.templechen.cameraopengldemo.Base.BaseCamera;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -26,7 +28,7 @@ import java.util.Comparator;
 import java.util.List;
 
 @RequiresApi(21)
-public class CameraV2 {
+public class CameraV2 extends BaseCamera {
 
     private static final String TAG = "CameraV2";
     private static final SparseIntArray ORIENTATIONS = new SparseIntArray();
@@ -184,5 +186,13 @@ public class CameraV2 {
 
     public void stopPreview(){
 
+    }
+
+    @Override
+    public void releaseCamera() {
+        if (cameraDevice != null){
+            cameraDevice.close();
+            cameraDevice = null;
+        }
     }
 }

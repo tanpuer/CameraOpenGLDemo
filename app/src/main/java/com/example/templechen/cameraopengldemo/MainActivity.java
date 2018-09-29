@@ -9,9 +9,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.templechen.cameraopengldemo.auto.CameraAutoVersionOpenGLSurfaceView;
+import com.example.templechen.cameraopengldemo.camera1.CameraV1OpenGLActivity;
 import com.example.templechen.cameraopengldemo.camera2.CameraV2OpenGLActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -27,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
     private Button startBackCameraBtn;
     private Button startFrontCameraBtnV2;
     private Button startBackCameraBtnV2;
+    private Button startFrontCameraAuto;
+    private Button startBackCameraAuto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +62,21 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startCameraV2Activity(true);
+            }
+        });
+
+        startFrontCameraAuto = findViewById(R.id.front_camera_btn_auto);
+        startBackCameraAuto = findViewById(R.id.back_camera_btn_auto);
+        startFrontCameraAuto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startAutoVersionCameraActvity(false);
+            }
+        });
+        startBackCameraAuto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startAutoVersionCameraActvity(true);
             }
         });
 
@@ -99,6 +117,12 @@ public class MainActivity extends AppCompatActivity {
 
     private void startCameraV2Activity(boolean openBackCamera){
         Intent intent = new Intent(this, CameraV2OpenGLActivity.class);
+        intent.putExtra("openBackCamera",openBackCamera);
+        startActivity(intent);
+    }
+
+    private void startAutoVersionCameraActvity(boolean openBackCamera){
+        Intent intent = new Intent(this, CameraAutoVersionOpenGLSurfaceView.class);
         intent.putExtra("openBackCamera",openBackCamera);
         startActivity(intent);
     }

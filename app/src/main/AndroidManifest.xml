@@ -21,8 +21,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CameraV1OpenGLActivity" />
+        <activity android:name=".camera1.CameraV1OpenGLActivity" />
         <activity android:name=".camera2.CameraV2OpenGLActivity" />
+        <activity android:name=".auto.CameraAutoVersionOpenGLSurfaceView" />
     </application>
 
 </manifest>

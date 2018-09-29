@@ -35,4 +35,17 @@
         android:text="打开后置摄像头V2"
         />
 
+    <Button
+        android:id="@+id/front_camera_btn_auto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="自动选择CameraVersion 前置"
+        />
+
+    <Button
+        android:id="@+id/back_camera_btn_auto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="自动选择CameraVersion 后置"/>
+
 </LinearLayout>

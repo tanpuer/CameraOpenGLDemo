@@ -1,7 +1,9 @@
-package com.example.templechen.cameraopengldemo;
+package com.example.templechen.cameraopengldemo.filterEngine;
 
 import android.content.Context;
 import android.opengl.GLES11Ext;
+
+import com.example.templechen.cameraopengldemo.utils.GLUtils;
 
 import java.nio.FloatBuffer;
 
@@ -40,7 +42,7 @@ public class BaseFilterEngine {
     public BaseFilterEngine(Context context, int OESTextureId){
         mContext = context;
         mOESTextureId = OESTextureId;
-        floatBuffer = Utils.createBuffer(Utils.vertexData);
+        floatBuffer = GLUtils.createBuffer(GLUtils.vertexData);
     }
 
     public void drawFrame(){

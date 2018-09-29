@@ -12,4 +12,6 @@ public abstract class BaseCamera {
 
     public abstract void stopPreview();
 
+    public abstract void releaseCamera();
+
 }

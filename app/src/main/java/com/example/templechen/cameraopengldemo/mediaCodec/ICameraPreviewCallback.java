@@ -1,4 +1,4 @@
-package com.example.templechen.cameraopengldemo;
+package com.example.templechen.cameraopengldemo.mediaCodec;
 
 import android.hardware.Camera;
 

@@ -1,8 +1,7 @@
-package com.example.templechen.cameraopengldemo;
+package com.example.templechen.cameraopengldemo.mediaCodec;
 
 import android.media.MediaCodec;
 import android.media.MediaCodecInfo;
-import android.media.MediaCodecList;
 import android.media.MediaFormat;
 import android.os.Environment;
 import android.support.annotation.RequiresApi;

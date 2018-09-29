@@ -1,4 +1,4 @@
-package com.example.templechen.cameraopengldemo;
+package com.example.templechen.cameraopengldemo.utils;
 
 import android.content.Context;
 import android.opengl.GLES11Ext;
@@ -34,7 +34,7 @@ import static android.opengl.GLES20.glLinkProgram;
 import static android.opengl.GLES20.glShaderSource;
 import static android.opengl.GLES20.glUseProgram;
 
-public class Utils {
+public class GLUtils {
 
     public static final float[] vertexData = {
             1f,1f, 1f,1f,

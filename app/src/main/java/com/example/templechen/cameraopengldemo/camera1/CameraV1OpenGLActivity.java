@@ -1,4 +1,4 @@
-package com.example.templechen.cameraopengldemo;
+package com.example.templechen.cameraopengldemo.camera1;
 
 import android.app.Activity;
 import android.content.pm.ActivityInfo;
@@ -8,9 +8,11 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.util.DisplayMetrics;
-import android.view.SurfaceHolder;
 import android.view.Window;
 import android.view.WindowManager;
+
+import com.example.templechen.cameraopengldemo.Base.BaseCamera;
+import com.example.templechen.cameraopengldemo.mediaRecorder.MediaRecorderWrap;
 
 public class CameraV1OpenGLActivity extends Activity{
 
@@ -18,7 +20,7 @@ public class CameraV1OpenGLActivity extends Activity{
 
     private CameraV1GLSurfaceView mGLSurfaceView;
     private int mCameraId;
-    private CameraV1 mCamera;
+    private BaseCamera mCamera;
     private static MediaRecorderWrap mediaRecorderWrap;
     private MediaRecorderAsyncTask mAsyncTask;
 

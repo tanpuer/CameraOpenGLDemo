@@ -9,5 +9,7 @@ public abstract class BaseCameraGLSurfaceView extends GLSurfaceView {
         super(context);
     }
 
+    public abstract void init(BaseCamera baseCamera, boolean isPreviewStarted, Context context);
 
+    public abstract void destroy();
 }

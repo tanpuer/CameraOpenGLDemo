@@ -1,4 +1,4 @@
-package com.example.templechen.cameraopengldemo;
+package com.example.templechen.cameraopengldemo.camera1;
 
 import android.app.Activity;
 import android.graphics.SurfaceTexture;
@@ -9,10 +9,13 @@ import android.hardware.Camera.CameraInfo;
 import android.util.Log;
 import android.view.Surface;
 
+import com.example.templechen.cameraopengldemo.Base.BaseCamera;
+import com.example.templechen.cameraopengldemo.mediaCodec.CameraMediaCodec;
+
 import java.io.IOException;
 import java.util.List;
 
-public class CameraV1 {
+public class CameraV1 extends BaseCamera {
 
     private static final String TAG = "CameraV1";
     private static final int BACK_CAMERA_WIDTH = 1920;
@@ -102,6 +105,18 @@ public class CameraV1 {
         return true;
     }
 
+    @Override
+    public void setSurfaceTexture(SurfaceTexture mSurfaceTexture) {
+        if (mCamera != null){
+            try {
+                //必须在startPreview方法之前设置
+                mCamera.setPreviewTexture(mSurfaceTexture);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     public void startPreview(){
         if (mCamera != null){
             mCamera.startPreview();
@@ -115,17 +130,6 @@ public class CameraV1 {
     public void stopPreview(){
         if (mCamera != null){
             mCamera.stopPreview();
-        }
-    }
-
-    public void setPreviewTexture(SurfaceTexture surfaceTexture){
-        if (mCamera != null){
-            try {
-                //必须在startPreview方法之前设置
-                mCamera.setPreviewTexture(surfaceTexture);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
     }
 

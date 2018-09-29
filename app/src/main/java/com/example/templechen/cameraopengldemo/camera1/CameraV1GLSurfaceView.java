@@ -1,25 +1,21 @@
-package com.example.templechen.cameraopengldemo.camera2;
+package com.example.templechen.cameraopengldemo.camera1;
 
 import android.content.Context;
-import android.opengl.GLSurfaceView;
-import android.support.annotation.RequiresApi;
 
 import com.example.templechen.cameraopengldemo.Base.BaseCamera;
 import com.example.templechen.cameraopengldemo.Base.BaseCameraGLSurfaceView;
 
+public class CameraV1GLSurfaceView extends BaseCameraGLSurfaceView {
 
-@RequiresApi(21)
-public class CameraV2GLSurfaceView extends BaseCameraGLSurfaceView {
+    private CameraV1Renderer mRenderer;
 
-    private CameraV2Renderer mRenderer;
-
-    public CameraV2GLSurfaceView(Context context) {
+    public CameraV1GLSurfaceView(Context context) {
         super(context);
     }
 
     public void init(BaseCamera baseCamera, boolean isPreviewStarted, Context context){
         setEGLContextClientVersion(2);
-        mRenderer = new CameraV2Renderer();
+        mRenderer = new CameraV1Renderer();
         mRenderer.init(baseCamera, this, isPreviewStarted, context);
         setRenderer(mRenderer);
     }

@@ -1,9 +1,11 @@
-package com.example.templechen.cameraopengldemo;
+package com.example.templechen.cameraopengldemo.mediaRecorder;
 
 import android.content.Context;
 import android.media.MediaRecorder;
 import android.media.MediaScannerConnection;
 import android.os.Environment;
+
+import com.example.templechen.cameraopengldemo.camera1.CameraV1;
 
 import java.io.File;
 import java.io.IOException;
