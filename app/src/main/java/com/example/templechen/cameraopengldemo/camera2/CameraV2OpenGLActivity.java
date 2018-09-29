@@ -10,7 +10,7 @@ import android.util.DisplayMetrics;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.example.templechen.cameraopengldemo.Base.BaseCamera;
+import com.example.templechen.cameraopengldemo.base.BaseCamera;
 
 @RequiresApi(21)
 public class CameraV2OpenGLActivity extends Activity {

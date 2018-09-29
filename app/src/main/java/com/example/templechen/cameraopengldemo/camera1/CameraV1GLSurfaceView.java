@@ -2,8 +2,8 @@ package com.example.templechen.cameraopengldemo.camera1;
 
 import android.content.Context;
 
-import com.example.templechen.cameraopengldemo.Base.BaseCamera;
-import com.example.templechen.cameraopengldemo.Base.BaseCameraGLSurfaceView;
+import com.example.templechen.cameraopengldemo.base.BaseCamera;
+import com.example.templechen.cameraopengldemo.base.BaseCameraGLSurfaceView;
 
 public class CameraV1GLSurfaceView extends BaseCameraGLSurfaceView {
 

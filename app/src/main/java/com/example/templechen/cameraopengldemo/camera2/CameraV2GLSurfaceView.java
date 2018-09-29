@@ -1,11 +1,10 @@
 package com.example.templechen.cameraopengldemo.camera2;
 
 import android.content.Context;
-import android.opengl.GLSurfaceView;
 import android.support.annotation.RequiresApi;
 
-import com.example.templechen.cameraopengldemo.Base.BaseCamera;
-import com.example.templechen.cameraopengldemo.Base.BaseCameraGLSurfaceView;
+import com.example.templechen.cameraopengldemo.base.BaseCamera;
+import com.example.templechen.cameraopengldemo.base.BaseCameraGLSurfaceView;
 
 
 @RequiresApi(21)

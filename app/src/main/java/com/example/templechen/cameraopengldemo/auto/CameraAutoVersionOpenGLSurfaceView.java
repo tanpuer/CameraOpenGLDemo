@@ -10,8 +10,8 @@ import android.util.DisplayMetrics;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.example.templechen.cameraopengldemo.Base.BaseCamera;
-import com.example.templechen.cameraopengldemo.Base.BaseCameraGLSurfaceView;
+import com.example.templechen.cameraopengldemo.base.BaseCamera;
+import com.example.templechen.cameraopengldemo.base.BaseCameraGLSurfaceView;
 import com.example.templechen.cameraopengldemo.camera1.CameraV1;
 import com.example.templechen.cameraopengldemo.camera1.CameraV1GLSurfaceView;
 import com.example.templechen.cameraopengldemo.camera2.CameraV2;

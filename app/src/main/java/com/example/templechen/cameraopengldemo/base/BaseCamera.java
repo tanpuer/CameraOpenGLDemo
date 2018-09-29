@@ -1,4 +1,4 @@
-package com.example.templechen.cameraopengldemo.Base;
+package com.example.templechen.cameraopengldemo.base;
 
 import android.graphics.SurfaceTexture;
 

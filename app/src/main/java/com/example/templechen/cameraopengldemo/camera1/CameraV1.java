@@ -9,7 +9,7 @@ import android.hardware.Camera.CameraInfo;
 import android.util.Log;
 import android.view.Surface;
 
-import com.example.templechen.cameraopengldemo.Base.BaseCamera;
+import com.example.templechen.cameraopengldemo.base.BaseCamera;
 import com.example.templechen.cameraopengldemo.mediaCodec.CameraMediaCodec;
 
 import java.io.IOException;

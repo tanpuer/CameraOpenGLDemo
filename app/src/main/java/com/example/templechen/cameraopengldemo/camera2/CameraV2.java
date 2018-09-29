@@ -19,7 +19,7 @@ import android.util.Size;
 import android.util.SparseIntArray;
 import android.view.Surface;
 
-import com.example.templechen.cameraopengldemo.Base.BaseCamera;
+import com.example.templechen.cameraopengldemo.base.BaseCamera;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -95,6 +95,7 @@ public class CameraV2 extends BaseCamera {
     private Size getOptimalSize(Size[] sizeMap, int width, int height) {
         List<Size> sizeList = new ArrayList<>();
         for (Size option : sizeMap){
+            Log.d(TAG, "getOptimalSize: " + option.getWidth() + " * " + option.getHeight());
             if (width == option.getWidth() && height == option.getHeight()){
                 return new Size(width, height);
             }

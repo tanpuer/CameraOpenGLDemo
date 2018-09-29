@@ -11,7 +11,7 @@ import android.util.DisplayMetrics;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.example.templechen.cameraopengldemo.Base.BaseCamera;
+import com.example.templechen.cameraopengldemo.base.BaseCamera;
 import com.example.templechen.cameraopengldemo.mediaRecorder.MediaRecorderWrap;
 
 public class CameraV1OpenGLActivity extends Activity{
