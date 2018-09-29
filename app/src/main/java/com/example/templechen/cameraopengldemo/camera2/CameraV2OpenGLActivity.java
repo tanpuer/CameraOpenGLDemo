@@ -11,9 +11,10 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.example.templechen.cameraopengldemo.base.BaseCamera;
+import com.example.templechen.cameraopengldemo.base.ICameraSizeListener;
 
 @RequiresApi(21)
-public class CameraV2OpenGLActivity extends Activity {
+public class CameraV2OpenGLActivity extends Activity implements ICameraSizeListener {
 
     private CameraV2GLSurfaceView mGLSurfaceView;
     private BaseCamera mCamera;
@@ -26,6 +27,7 @@ public class CameraV2OpenGLActivity extends Activity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         mGLSurfaceView = new CameraV2GLSurfaceView(this);
         mCamera = new CameraV2(this);
+        ((CameraV2) mCamera).setCameraSizeListener(this);
         DisplayMetrics metrics = new DisplayMetrics();
         int cameraFacing = getIntent().getBooleanExtra("openBackCamera", true)? CameraCharacteristics.LENS_FACING_BACK: CameraCharacteristics.LENS_FACING_FRONT;
         if (!mCamera.openCamera(metrics.widthPixels, metrics.heightPixels, cameraFacing)){
@@ -45,6 +47,13 @@ public class CameraV2OpenGLActivity extends Activity {
         if (mCamera != null){
             mCamera.stopPreview();
             mCamera = null;
+        }
+    }
+
+    @Override
+    public void onCameraSizeChanged(int width, int height) {
+        if (mGLSurfaceView != null){
+            mGLSurfaceView.setAspectRatio(width, height);
         }
     }
 }

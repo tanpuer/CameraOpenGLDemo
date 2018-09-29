@@ -4,6 +4,8 @@ import android.graphics.SurfaceTexture;
 
 public abstract class BaseCamera {
 
+    protected ICameraSizeListener iCameraSizeListener;
+
     public abstract boolean openCamera(int width, int height, int cameraId);
 
     public abstract void setSurfaceTexture(SurfaceTexture mSurfaceTexture);
@@ -14,4 +16,7 @@ public abstract class BaseCamera {
 
     public abstract void releaseCamera();
 
+    public void setiCameraSizeListener(ICameraSizeListener iCameraSizeListener) {
+        this.iCameraSizeListener = iCameraSizeListener;
+    }
 }

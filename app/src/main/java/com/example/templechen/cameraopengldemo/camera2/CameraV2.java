@@ -20,6 +20,7 @@ import android.util.SparseIntArray;
 import android.view.Surface;
 
 import com.example.templechen.cameraopengldemo.base.BaseCamera;
+import com.example.templechen.cameraopengldemo.base.ICameraSizeListener;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -52,6 +53,7 @@ public class CameraV2 extends BaseCamera {
     private CaptureRequest.Builder mCaptureRequestBuilder;
     private CaptureRequest mCaptureRequest;
     private CameraCaptureSession mSession;
+
 
     public CameraV2(Activity activity){
         this.mActivity = activity;
@@ -180,6 +182,17 @@ public class CameraV2 extends BaseCamera {
 
                 }
             }, cameraHandler);
+
+            //callback preview size
+            if (iCameraSizeListener != null){
+                Handler mainHandler = new Handler(mActivity.getMainLooper());
+                mainHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        iCameraSizeListener.onCameraSizeChanged(mPreviewSize.getHeight(), mPreviewSize.getWidth());
+                    }
+                });
+            }
         } catch (CameraAccessException e) {
             e.printStackTrace();
         }
@@ -195,5 +208,9 @@ public class CameraV2 extends BaseCamera {
             cameraDevice.close();
             cameraDevice = null;
         }
+    }
+
+    public void setCameraSizeListener(ICameraSizeListener iCameraSizeListener) {
+        this.iCameraSizeListener = iCameraSizeListener;
     }
 }
